@@ -1,0 +1,12 @@
+services:
+    auth.provider.oauth.service.iiet:
+        class: iiet\oauth\provider
+        arguments:
+            - @config
+            - @request
+        tags:
+            - { name: auth.provider.oauth.service }
+    iiet.oauth.listener:
+        class: iiet\oauth\event\listener
+        tags:
+            - { name: event.listener }
