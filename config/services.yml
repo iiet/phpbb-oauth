@@ -1,4 +1,21 @@
 services:
+    auth.provider.oauth_iiet:
+        class: iiet\oauth\auth\provider\oauth_iiet
+        arguments:
+            - @dbal.conn
+            - @config
+            - @passwords.manager
+            - @request
+            - @user
+            - %tables.auth_provider_oauth_token_storage%
+            - %tables.auth_provider_oauth_account_assoc%
+            - @auth.provider.oauth.service_collection
+            - %tables.users%
+            - @service_container
+            - %core.root_path%
+            - %core.php_ext%
+        tags:
+            - { name: auth.provider }
     auth.provider.oauth.service.iiet:
         class: iiet\oauth\provider
         arguments:
@@ -8,5 +25,8 @@ services:
             - { name: auth.provider.oauth.service }
     iiet.oauth.listener:
         class: iiet\oauth\event\listener
+        arguments:
+            - @request
+            - @user
         tags:
             - { name: event.listener }
