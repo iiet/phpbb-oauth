@@ -36,7 +36,7 @@ class oauth_iiet extends \phpbb\auth\provider\oauth\oauth
 		// Get the service credentials for the given service
 		$service_credentials = $this->service_providers[$service_name]->get_service_credentials();
 
-		$storage = new \phpbb\auth\provider\oauth\token_storage($this->db, $this->user, $this->auth_provider_oauth_token_storage_table);
+		$storage = new \phpbb\auth\provider\oauth\token_storage($this->db, $this->user, $this->auth_provider_oauth_token_storage_table, $this->auth_provider_oauth_state_table);
 		$query = 'mode=login&login=external&oauth_service=' . $service_name_original . '&redirect=' . rawurlencode(htmlspecialchars_decode($this->request->variable('redirect', '')));
 		$service = $this->get_service($service_name_original, $storage, $service_credentials, $query, $this->service_providers[$service_name]->get_auth_scope());
 

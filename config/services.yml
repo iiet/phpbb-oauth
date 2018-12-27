@@ -8,10 +8,12 @@ services:
             - @request
             - @user
             - %tables.auth_provider_oauth_token_storage%
+            - %tables.auth_provider_oauth_states%
             - %tables.auth_provider_oauth_account_assoc%
             - @auth.provider.oauth.service_collection
             - %tables.users%
             - @service_container
+            - @dispatcher
             - %core.root_path%
             - %core.php_ext%
         tags:
